@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+html {
+	-webkit-overflow-scrolling: touch;
+	overflow-scrolling: touch;
+	-webkit-text-size-adjust: 100%;
+	-ms-text-size-adjust: 100%;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	font-size: 16px;
+}
+
+html,
+body {
+	-webkit-tap-highlight-color: transparent;
+	height: 100%
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	border: none;
+	list-style-type: none;
+}

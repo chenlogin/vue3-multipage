@@ -1,0 +1,49 @@
+/* Default font size in pixels if not overridden. */
+$baseFontSize: 32;
+
+/* Convert PX units to REMs.
+Ex: margin-right: pxToRem(16);
+*/
+@function pxToRem($pxVal) {
+	@return #{ calc($pxVal / $baseFontSize) }rem;
+}
+
+/* Used to convert PX to REMs for multiple properties or values or both.
+
+Examples:
+@include remCalc(line-height, 30)
+@include remCalc(line-height, 30)
+@include remCalc(width height, 125);
+@include remCalc(padding, 0 25);
+@include remCalc(text-shadow, (#0d6e28 1 1) (#777 0 0 2));
+@include remCalc(box-shadow, (inset 0 0 0 1 #2a9022) (inset 0 0 3 #459966));
+*/
+@mixin remCalc($props, $sizes) {
+	$values: ();
+	$subLists: false;
+
+	@each $s in $sizes {
+
+		/* unwrap lists for values that have multiple list of values such as text-shadow */
+		@if type-of($s)==list {
+			$subLists: true;
+			$vv: ();
+
+			@each $ss in $s {
+				$vv: append($vv, if(type-of($ss)==number, #{ calc($ss / $baseFontSize) }rem, $ss));
+			}
+
+			$values: append($values, join((), $vv));
+		}
+
+		@else {
+			$values: append($values, if(type-of($s)==number, #{ calc($s / $baseFontSize) }rem, $s));
+		}
+	}
+
+	$value: join((), $values, if($subLists, comma, space));
+
+	@each $prop in $props {
+		#{$prop}: $value
+	}
+}
