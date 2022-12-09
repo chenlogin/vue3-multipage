@@ -19,6 +19,13 @@ const multiPages = p => {
     const key = path.relative(PAGE_PATH, htmlUrl).replace(/(\.html)$/, '')
     pages[key.split('/')[1]] = htmlUrl
   })
+  /**
+   * 多页项目，目录结构src/pages/xxx/xxx.html
+   * 编译入口匹配 src/pages 目录下html文件
+   * 备注：
+   * 1、src/pages 下仅支持一级目录
+   * 2、文件名作为编译chunk名，不要使用index.html 这样的名字
+   */
   return pages
 }
 // https://vitejs.dev/config/
