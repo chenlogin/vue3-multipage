@@ -68,6 +68,7 @@ export default defineConfig(({ command, mode }) => {
     plugins: [
       vue(),
       Components({
+        //自动引入组件，并按需引入组件的样式
         resolvers: [VantResolver()]
       })
     ],
